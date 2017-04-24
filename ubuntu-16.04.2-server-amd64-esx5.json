@@ -1,0 +1,61 @@
+{
+  "variables": {
+  },
+  "builders": [{
+    "type": "vmware-iso",
+    "headless": "false",
+    "guest_os_type": "ubuntu-64",
+
+    "http_directory": "httpdir",
+    "disk_size": "20000",
+    "disk_type_id": "thin",
+
+    "output_directory": "ubuntu-64",
+    "boot_wait": "5s",
+    "tools_upload_flavor": "linux",
+
+    "iso_urls": ["ubuntu-16.04.2-server-amd64.iso", "http://releases.ubuntu.com/16.04/ubuntu-16.04.2-server-amd64.iso"],
+    "iso_checksum": "2bce60d18248df9980612619ff0b34e6",
+    "iso_checksum_type": "md5",
+
+    "floppy_files": [
+      "preseed.cfg"
+    ],
+
+    "remote_type": "esx5",
+    "remote_host": "192.168.8.196",
+    "remote_username": "root",
+    "remote_password": "2rrixdai",
+    "keep_registered": true,
+
+    "vm_name": "ubuntu-64",
+    "vmx_data": {
+      "cpuid.coresPerSocket": "1",
+      "memsize": "1024",
+      "numvcpus": "2",
+      "ethernet0.networkName": "VM Network"
+    },
+
+    "ssh_username": "ubuntu",
+    "ssh_password": "insecure",
+    "ssh_port": 22,
+    "ssh_wait_timeout": "30000s",
+
+    "boot_command": [
+      "<enter><wait><<f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+      "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+      "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+      "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+      "/install/vmlinuz noapic ",
+      "preseed/file=/floppy/preseed.cfg ",
+      "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+      "hostname={{ .Name }} ",
+      "fb=false debconf/frontend=noninteractive ",
+      "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+      "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+      "initrd=/install/initrd.gz -- <enter><wait>"
+    ],
+
+    "shutdown_command": "echo 'insecure' | sudo -S shutdown -P now"
+  }]
+}
