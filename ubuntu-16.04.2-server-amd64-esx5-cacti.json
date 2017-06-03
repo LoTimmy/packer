@@ -3,14 +3,14 @@
   },
   "builders": [{
     "type": "vmware-iso",
-    "headless": "false",
+    "headless": true,
     "guest_os_type": "ubuntu-64",
 
     "http_directory": "httpdir",
     "disk_size": "20000",
     "disk_type_id": "thin",
 
-    "output_directory": "ubuntu-64",
+    "output_directory": "cacti",
     "boot_wait": "5s",
     "tools_upload_flavor": "linux",
 
@@ -28,7 +28,7 @@
     "remote_password": "2rrixdai",
     "keep_registered": true,
 
-    "vm_name": "ubuntu-64",
+    "vm_name": "cacti",
     "vmx_data": {
       "cpuid.coresPerSocket": "1",
       "memsize": "1024",

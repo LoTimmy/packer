@@ -1,0 +1,57 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<enter><wait><<f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "/install/vmlinuz noapic ",
+        "preseed/file=/floppy/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "hostname={{ .Name }} ",
+        "fb=false debconf/frontend=noninteractive ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
+        "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter><wait>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": "20000",
+      "disk_type_id": "thin",
+      "floppy_files": [
+        "preseed.cfg"
+      ],
+      "guest_os_type": "ubuntu-64",
+      "headless": "true",
+      "iso_checksum": "2bce60d18248df9980612619ff0b34e6",
+      "iso_checksum_type": "md5",
+      "iso_urls": [
+        "http://releases.ubuntu.com/16.04/ubuntu-16.04.2-server-amd64.iso"
+      ],
+      "keep_registered": true,
+      "output_directory": "gitlab",
+      "remote_host": "192.168.88.241",
+      "remote_port": "22",
+      "remote_password": "2rrixdai",
+      "remote_type": "esx5",
+      "remote_username": "root",
+      "shutdown_command": "echo 'insecure' | sudo -S shutdown -P now",
+      "ssh_password": "insecure",
+      "ssh_port": 22,
+      "ssh_username": "ubuntu",
+      "ssh_wait_timeout": "30000s",
+      "tools_upload_flavor": "linux",
+      "type": "vmware-iso",
+      "vm_name": "gitlab",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "ethernet0.networkName": "LAN",
+        "memsize": "1024",
+        "numvcpus": "2"
+      }
+    }
+  ],
+  "post-processors": [],
+  "variables": {}
+}
+
